@@ -5,7 +5,7 @@
     using NLog;
     using NLog.Extensions.Logging;
     using NUnit.Framework;
-    using NsbLogManager = NServiceBus.Logging.LogManager;
+    //using NsbLogManager = NServiceBus.Logging.LogManager;
 
     public class When_using_nlog_extension_logger
     {
@@ -16,18 +16,20 @@
             var memoryTarget = new NLog.Targets.MemoryTarget();
             config.AddRuleForAllLevels(memoryTarget);
             LogManager.Configuration = config;
-            
-            NsbLogManager.Use<ExtensionLogging<NLogLoggerFactory>>();
-            
+
+            //NsbLogManager.Use<ExtensionLogging<NLogLoggerFactory>>();
+
             var endpointConfiguration = new EndpointConfiguration("LoggingTests");
+
+            endpointConfiguration.UseLogger(new NLogLoggerFactory());
             endpointConfiguration.EnableInstallers();
             endpointConfiguration.SendFailedMessagesTo("error");
             endpointConfiguration.UseTransport<LearningTransport>();
             endpointConfiguration.UsePersistence<InMemoryPersistence>();
-            
+
             var endpoint = await Endpoint.Start(endpointConfiguration)
                 .ConfigureAwait(false);
-            
+
             try
             {
                 Assert.IsNotEmpty(memoryTarget.Logs);
