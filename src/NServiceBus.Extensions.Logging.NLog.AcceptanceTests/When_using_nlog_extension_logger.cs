@@ -1,11 +1,12 @@
 ﻿namespace NServiceBus.Extensions.DependencyInjection.AcceptanceTests
 {
+    using System;
     using System.Threading.Tasks;
     using Logging;
     using NLog;
     using NLog.Extensions.Logging;
     using NUnit.Framework;
-    //using NsbLogManager = NServiceBus.Logging.LogManager;
+    //using NsbLogManager = NServiceBus;
 
     public class When_using_nlog_extension_logger
     {
@@ -21,7 +22,9 @@
 
             var endpointConfiguration = new EndpointConfiguration("LoggingTests");
 
+            //this is the new API
             endpointConfiguration.UseLogger(new NLogLoggerFactory());
+
             endpointConfiguration.EnableInstallers();
             endpointConfiguration.SendFailedMessagesTo("error");
             endpointConfiguration.UseTransport<LearningTransport>();
@@ -32,7 +35,13 @@
 
             try
             {
+                foreach (var l in memoryTarget.Logs)
+                {
+                    Console.WriteLine(l);
+                }
+
                 Assert.IsNotEmpty(memoryTarget.Logs);
+
             }
             finally
             {

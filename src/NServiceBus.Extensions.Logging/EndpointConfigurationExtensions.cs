@@ -16,7 +16,8 @@
         public static void UseLogger(this EndpointConfiguration endpointConfiguration,
             ILoggerFactory loggerFactory)
         {
-            endpointConfiguration.GetSettings().Set<ILoggerFactory>(loggerFactory);
+            //TODO: Could we do something around allowing the MS ILogger to be injected?
+            endpointConfiguration.GetSettings().Set(loggerFactory);
         }
     }
 }
