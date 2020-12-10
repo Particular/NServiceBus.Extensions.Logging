@@ -11,12 +11,10 @@
         [Test]
         public void Approve_NServiceBusExtensionsLogging()
         {
-            var options = new ApiGeneratorOptions
+            var publicApi = typeof(ExtensionsLoggerFactory).Assembly.GeneratePublicApi(new ApiGeneratorOptions
             {
-                ExcludeAttributes = new[] { "System.Runtime.Versioning.TargetFrameworkAttribute" }
-            };
-
-            var publicApi = ApiGenerator.GeneratePublicApi(typeof(ExtensionsLoggerFactory).Assembly, options);
+                ExcludeAttributes = new[] { "System.Runtime.Versioning.TargetFrameworkAttribute", "System.Reflection.AssemblyMetadataAttribute" }
+            });
             Approver.Verify(publicApi);
         }
     }
