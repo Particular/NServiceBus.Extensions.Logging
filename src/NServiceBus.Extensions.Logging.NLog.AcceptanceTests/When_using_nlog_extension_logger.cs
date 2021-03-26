@@ -22,7 +22,7 @@
             var endpointConfiguration = new EndpointConfiguration("LoggingTests");
             endpointConfiguration.EnableInstallers();
             endpointConfiguration.SendFailedMessagesTo("error");
-            endpointConfiguration.UseTransport<LearningTransport>();
+            endpointConfiguration.UseTransport(new LearningTransport());
             endpointConfiguration.UsePersistence<LearningPersistence>();
 
             var endpoint = await Endpoint.Start(endpointConfiguration)
