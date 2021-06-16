@@ -12,7 +12,7 @@
   <ItemGroup>
     <PackageReference Include="GitHubActionsTestLogger" Version="1.2.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
-    <PackageReference Include="NLog.Extensions.Logging" Version="1.7.2" />
+    <PackageReference Include="NLog.Extensions.Logging" Version="1.7.3" />
     <PackageReference Include="NServiceBus" Version="8.0.0-alpha.940" />
   </ItemGroup>
 
