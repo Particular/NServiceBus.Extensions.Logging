@@ -1,4 +1,4 @@
-# NServiceBus.Extensions.DependencyInjection
+# NServiceBus.Extensions.Logging
 
 NServiceBus logger abstraction implementation to support `Microsoft.Extensions.Logging`.
 
