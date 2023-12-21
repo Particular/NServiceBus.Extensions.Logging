@@ -11,7 +11,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0-preview.7.23375.6" />
     <PackageReference Include="NLog.Extensions.Logging" Version="5.3.3" />
-    <PackageReference Include="NServiceBus" Version="9.0.0-alpha.1" />
+    <PackageReference Include="NServiceBus" Version="9.0.0-alpha.9" />
   </ItemGroup>
 
   <ItemGroup>
