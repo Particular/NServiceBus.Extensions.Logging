@@ -10,7 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0-preview.7.23375.6" />
-    <PackageReference Include="NServiceBus" Version="9.0.0-alpha.1" />
+    <PackageReference Include="NServiceBus" Version="9.0.0-alpha.10" />
     <PackageReference Include="Particular.Approvals" Version="1.0.0" />
     <PackageReference Include="PublicApiGenerator" Version="11.1.0" />
   </ItemGroup>
