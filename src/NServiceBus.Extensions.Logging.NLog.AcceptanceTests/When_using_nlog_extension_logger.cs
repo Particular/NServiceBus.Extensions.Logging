@@ -20,6 +20,7 @@
             NsbLogManager.UseFactory(new ExtensionsLoggerFactory(new NLogLoggerFactory()));
 
             var endpointConfiguration = new EndpointConfiguration("LoggingTests");
+            endpointConfiguration.UseSerialization<SystemJsonSerializer>();
             endpointConfiguration.EnableInstallers();
             endpointConfiguration.SendFailedMessagesTo("error");
             endpointConfiguration.UseTransport(new LearningTransport());
