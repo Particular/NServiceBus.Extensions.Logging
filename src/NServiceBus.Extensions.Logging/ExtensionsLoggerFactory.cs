@@ -16,21 +16,22 @@ namespace NServiceBus.Extensions.Logging
         /// <param name="loggerFactory">An initialized <see cref="Microsoft.Extensions.Logging.ILoggerFactory"/> instance.</param>
         public ExtensionsLoggerFactory(Microsoft.Extensions.Logging.ILoggerFactory loggerFactory)
         {
-            this.loggerFactory = loggerFactory ?? throw new ArgumentNullException(nameof(loggerFactory));
+            ArgumentNullException.ThrowIfNull(loggerFactory);
+
+            this.loggerFactory = loggerFactory;
         }
 
         /// <inheritdoc />
         public ILog GetLogger(Type type)
         {
+            ArgumentNullException.ThrowIfNull(type);
+
             return new ExtensionsLogger(loggerFactory.CreateLogger(type.FullName));
         }
 
         /// <inheritdoc />
-        public ILog GetLogger(string name)
-        {
-            return new ExtensionsLogger(loggerFactory.CreateLogger(name));
-        }
+        public ILog GetLogger(string name) => new ExtensionsLogger(loggerFactory.CreateLogger(name));
 
-        Microsoft.Extensions.Logging.ILoggerFactory loggerFactory;
+        readonly Microsoft.Extensions.Logging.ILoggerFactory loggerFactory;
     }
 }
