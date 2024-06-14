@@ -1,3 +1,0 @@
-component_type: Logger
-component_packages:
-  - name: NServiceBus.Extensions.Logging
