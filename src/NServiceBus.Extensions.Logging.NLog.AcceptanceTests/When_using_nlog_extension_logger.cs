@@ -31,7 +31,7 @@
 
             try
             {
-                Assert.IsNotEmpty(memoryTarget.Logs);
+                Assert.That(memoryTarget.Logs, Is.Not.Empty);
             }
             finally
             {
