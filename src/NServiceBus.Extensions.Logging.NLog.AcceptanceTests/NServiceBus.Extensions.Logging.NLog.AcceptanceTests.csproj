@@ -10,7 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="NLog.Extensions.Logging" Version="5.3.12" />
-    <PackageReference Include="NServiceBus" Version="9.1.0" />
+    <PackageReference Include="NServiceBus" Version="9.1.1" />
   </ItemGroup>
 
   <ItemGroup>
