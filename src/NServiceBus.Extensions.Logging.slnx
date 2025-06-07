@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="Custom.Build.props" />
+  </Folder>
+  <Project Path="NServiceBus.Extensions.Logging.NLog.AcceptanceTests/NServiceBus.Extensions.Logging.NLog.AcceptanceTests.csproj" />
+  <Project Path="NServiceBus.Extensions.Logging.Tests/NServiceBus.Extensions.Logging.Tests.csproj" />
+  <Project Path="NServiceBus.Extensions.Logging/NServiceBus.Extensions.Logging.csproj" />
+</Solution>
