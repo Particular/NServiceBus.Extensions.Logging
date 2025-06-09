@@ -3,7 +3,7 @@ namespace NServiceBus.Extensions.Logging
     public class ExtensionsLoggerFactory : NServiceBus.Logging.ILoggerFactory
     {
         public ExtensionsLoggerFactory(Microsoft.Extensions.Logging.ILoggerFactory loggerFactory) { }
-        public NServiceBus.Logging.ILog GetLogger(string name) { }
         public NServiceBus.Logging.ILog GetLogger(System.Type type) { }
+        public NServiceBus.Logging.ILog GetLogger(string name) { }
     }
 }
