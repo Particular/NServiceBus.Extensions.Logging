@@ -9,6 +9,7 @@ using NServiceBus.AcceptanceTesting;
 using NServiceBus.AcceptanceTests;
 using NServiceBus.AcceptanceTests.EndpointTemplates;
 using NServiceBus.Logging;
+using NLogLogManager = global::NLog.LogManager;
 using NsbLogManager = NServiceBus.Logging.LogManager;
 
 [NonParallelizable]
@@ -20,7 +21,7 @@ public class When_using_nlog_extension_logger : NServiceBusAcceptanceTest
         var memoryTarget = new MemoryTarget();
         var config = new LoggingConfiguration();
         config.AddRuleForAllLevels(memoryTarget);
-        global::NLog.LogManager.Configuration = config;
+        NLogLogManager.Configuration = config;
 
         await using var nlogLoggerFactory = new NLogLoggerFactory();
 
@@ -44,9 +45,9 @@ public class When_using_nlog_extension_logger : NServiceBusAcceptanceTest
 #pragma warning restore CS0618
     }
 
-    public class Context : ScenarioContext;
+    class Context : ScenarioContext;
 
-    public class EndpointUsingBridge : EndpointConfigurationBuilder
+    class EndpointUsingBridge : EndpointConfigurationBuilder
     {
         public EndpointUsingBridge() => EndpointSetup<DefaultServer>();
     }
