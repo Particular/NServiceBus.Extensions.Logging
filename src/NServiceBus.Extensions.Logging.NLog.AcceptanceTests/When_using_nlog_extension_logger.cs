@@ -1,43 +1,53 @@
-﻿namespace NServiceBus.Extensions.DependencyInjection.AcceptanceTests
+﻿namespace NServiceBus.Extensions.Logging.NLog.AcceptanceTests;
+
+using System.Threading.Tasks;
+using global::NLog.Config;
+using global::NLog.Extensions.Logging;
+using global::NLog.Targets;
+using NUnit.Framework;
+using NServiceBus.AcceptanceTesting;
+using NServiceBus.AcceptanceTests;
+using NServiceBus.AcceptanceTests.EndpointTemplates;
+using NServiceBus.Logging;
+using NsbLogManager = NServiceBus.Logging.LogManager;
+
+[NonParallelizable]
+public class When_using_nlog_extension_logger : NServiceBusAcceptanceTest
 {
-    using System.Threading.Tasks;
-    using Logging;
-    using NLog;
-    using NLog.Extensions.Logging;
-    using NUnit.Framework;
-    using NsbLogManager = NServiceBus.Logging.LogManager;
-
-    public class When_using_nlog_extension_logger
+    [Test]
+    public async Task Should_log_nsb_logs_through_nlog()
     {
-        [Test]
-        public async Task Should_log_nsb_logs()
-        {
-            var config = new NLog.Config.LoggingConfiguration();
-            var memoryTarget = new NLog.Targets.MemoryTarget();
-            config.AddRuleForAllLevels(memoryTarget);
-            LogManager.Configuration = config;
+        var memoryTarget = new MemoryTarget();
+        var config = new LoggingConfiguration();
+        config.AddRuleForAllLevels(memoryTarget);
+        global::NLog.LogManager.Configuration = config;
 
-            NsbLogManager.UseFactory(new ExtensionsLoggerFactory(new NLogLoggerFactory()));
+        await using var nlogLoggerFactory = new NLogLoggerFactory();
 
-            var endpointConfiguration = new EndpointConfiguration("LoggingTests");
-            endpointConfiguration.UseSerialization<SystemJsonSerializer>();
-            endpointConfiguration.EnableInstallers();
-            endpointConfiguration.SendFailedMessagesTo("error");
-            endpointConfiguration.UseTransport(new LearningTransport());
-            endpointConfiguration.UsePersistence<LearningPersistence>();
+#pragma warning disable CS0618 // ExtensionsLoggerFactory is deprecated; test exercises legacy behavior intentionally
+        NsbLogManager.UseFactory(new ExtensionsLoggerFactory(nlogLoggerFactory));
+#pragma warning restore CS0618
 
-            var endpoint = await Endpoint.Start(endpointConfiguration)
-                .ConfigureAwait(false);
+        await Scenario.Define<Context>()
+            .WithEndpoint<EndpointUsingBridge>()
+            .Done(c => c.EndpointsStarted)
+            .Run();
 
-            try
-            {
-                Assert.That(memoryTarget.Logs, Is.Not.Empty);
-            }
-            finally
-            {
-                await endpoint.Stop()
-                    .ConfigureAwait(false);
-            }
-        }
+        Assert.That(memoryTarget.Logs, Is.Not.Empty);
+    }
+
+    [TearDown]
+    public void Teardown()
+    {
+#pragma warning disable CS0618
+        NsbLogManager.Use<DefaultFactory>();
+#pragma warning restore CS0618
+    }
+
+    public class Context : ScenarioContext;
+
+    public class EndpointUsingBridge : EndpointConfigurationBuilder
+    {
+        public EndpointUsingBridge() => EndpointSetup<DefaultServer>();
     }
 }
