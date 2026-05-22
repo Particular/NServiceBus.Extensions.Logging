@@ -2,12 +2,18 @@ namespace NServiceBus.Extensions.Logging
 {
     using System;
     using NServiceBus.Logging;
+    using Particular.Obsoletes;
 
     /// <summary>
     /// Usage:
     ///       ILoggerFactory extensionsLoggingFactory = ...;
     ///       LogManager.UseFactory(new ExtensionsLoggerFactory(extensionsLoggingFactory));
     /// </summary>
+    [ObsoleteMetadata(
+        Message = "The logging bridge is no longer required. NServiceBus now natively uses Microsoft.Extensions.Logging when hosting endpoints with AddNServiceBusEndpoint.",
+        TreatAsErrorFromVersion = "5",
+        RemoveInVersion = "6")]
+    [Obsolete("The logging bridge is no longer required. NServiceBus now natively uses Microsoft.Extensions.Logging when hosting endpoints with AddNServiceBusEndpoint. Will be treated as an error from version 5.0.0. Will be removed in version 6.0.0.", false)]
     public class ExtensionsLoggerFactory : ILoggerFactory
     {
         /// <summary>
