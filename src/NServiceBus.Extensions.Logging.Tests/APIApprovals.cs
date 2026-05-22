@@ -11,7 +11,9 @@
         [Test]
         public void Approve_NServiceBusExtensionsLogging()
         {
+#pragma warning disable CS0618 // Type or member is obsolete
             var publicApi = typeof(ExtensionsLoggerFactory).Assembly.GeneratePublicApi(new ApiGeneratorOptions
+#pragma warning restore CS0618 // Type or member is obsolete
             {
                 ExcludeAttributes =
                 [
