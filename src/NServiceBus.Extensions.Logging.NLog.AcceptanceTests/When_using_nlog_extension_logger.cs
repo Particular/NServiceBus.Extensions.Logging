@@ -4,11 +4,11 @@ using System.Threading.Tasks;
 using global::NLog.Config;
 using global::NLog.Extensions.Logging;
 using global::NLog.Targets;
-using NUnit.Framework;
 using NServiceBus.AcceptanceTesting;
 using NServiceBus.AcceptanceTests;
 using NServiceBus.AcceptanceTests.EndpointTemplates;
 using NServiceBus.Logging;
+using NUnit.Framework;
 using NLogLogManager = global::NLog.LogManager;
 using NsbLogManager = NServiceBus.Logging.LogManager;
 

@@ -9,10 +9,10 @@ using global::NLog.Config;
 using global::NLog.Extensions.Logging;
 using global::NLog.Targets;
 using Microsoft.Extensions.DependencyInjection;
-using NUnit.Framework;
 using NServiceBus.AcceptanceTesting;
 using NServiceBus.AcceptanceTests;
 using NServiceBus.AcceptanceTests.EndpointTemplates;
+using NUnit.Framework;
 using Settings;
 
 [NonParallelizable]
