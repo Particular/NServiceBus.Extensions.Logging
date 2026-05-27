@@ -2,12 +2,18 @@ namespace NServiceBus.Extensions.Logging
 {
     using System;
     using NServiceBus.Logging;
+    using Particular.Obsoletes;
 
     /// <summary>
     /// Usage:
     ///       ILoggerFactory extensionsLoggingFactory = ...;
     ///       LogManager.UseFactory(new ExtensionsLoggerFactory(extensionsLoggingFactory));
     /// </summary>
+    [ObsoleteMetadata(
+        Message = "NServiceBus now natively uses Microsoft.Extensions.Logging, so the NServiceBus.Extensions.Logging package is no longer required. When using 'AddNServiceBusEndpoint', configure logging on the host builder. For self-hosting with 'Endpoint.Start', use 'RegisterComponents(s => s.AddLogging(builder => builder.AddNLog() / builder.AddSerilog() / etc.))' instead. 'RegisterComponents' is also deprecated, but CS0618 may be suppressed as a migration step until all service registrations are moved to a host-managed service collection.",
+        TreatAsErrorFromVersion = "5",
+        RemoveInVersion = "6")]
+    [Obsolete("NServiceBus now natively uses Microsoft.Extensions.Logging, so the NServiceBus.Extensions.Logging package is no longer required. When using 'AddNServiceBusEndpoint', configure logging on the host builder. For self-hosting with 'Endpoint.Start', use 'RegisterComponents(s => s.AddLogging(builder => builder.AddNLog() / builder.AddSerilog() / etc.))' instead. 'RegisterComponents' is also deprecated, but CS0618 may be suppressed as a migration step until all service registrations are moved to a host-managed service collection. Will be treated as an error from version 5.0.0. Will be removed in version 6.0.0.", false)]
     public class ExtensionsLoggerFactory : ILoggerFactory
     {
         /// <summary>
